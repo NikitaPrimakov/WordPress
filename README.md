@@ -1,2 +1,1 @@
-# WordPress
-Helm Chart for WordPress
+# Helm chart for WordPress

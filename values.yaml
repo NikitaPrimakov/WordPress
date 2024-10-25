@@ -1,10 +1,14 @@
 namespace: wordpress-main
 replicas: 1
 wordpress_user: admin
+mariadb_user: admin
 wordpress_db_name: database
 wordpress_db_host: mariadb-api
 http_port: 80
+mariadb_database: database
 secrets:
+  mariadb_password: YWRtaW4=
+  mariadb_root_password: cm9vdA==
   wordpress_db_password: YWRtaW4=
 storage:
   size: 1Gi

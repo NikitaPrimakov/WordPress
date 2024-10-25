@@ -1,0 +1,43 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: mariadb
+  namespace: {{.Values.namespace}}
+spec:
+  selector:
+    matchLabels:
+      app: mariadb
+  replicas: {{.Values.replicas}}
+  strategy:
+    type: Recreate 
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      volumes:
+        - name: mariadb-pvc
+          persistentVolumeClaim:
+            claimName: mariadb-pvc
+      containers:
+        - name: mariadb
+          image: mariadb:latest
+          env:
+            - name: MARIADB_USER
+              value: {{.Values.mariadb_user}}
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                    name: secret
+                    key: mariadb_password
+            - name: MARIADB_DATABASE
+              value: {{.Values.mariadb_database}}
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret
+                  key: mariadb_root_password
+          ports:
+            - name: mariadb-api
+              protocol: TCP
+              containerPort: 3306

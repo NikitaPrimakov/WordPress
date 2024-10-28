@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-pvc
+  name: mariadb-pvc
   namespace: {{.Values.namespace}}
   labels:
-    app: wordpress
+    app: mariadb
 spec:
   accessModes:
     - ReadWriteOnce

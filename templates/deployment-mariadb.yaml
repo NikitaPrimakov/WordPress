@@ -41,3 +41,6 @@ spec:
             - name: mariadb-api
               protocol: TCP
               containerPort: 3306
+        volumeMounts:
+          - name: mariadb-pvc
+            mountPath: /var/lib/mysql
